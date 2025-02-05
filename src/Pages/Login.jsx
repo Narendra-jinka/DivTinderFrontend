@@ -1,13 +1,22 @@
 import React from "react";
+import axios from "axios";
 
 const login = () => {
   const [formData , setFormData] = React.useState({
-    email : "",
-    password : ""
+    email : "rithu@gmail.com",
+    password : "Rithu@123"
   });
 
   const handleChanges = async ()=>{
-    
+    try {
+         await axios.post("http://localhost:3344/login",formData,{withCredentials:true}).then((res)=>{
+          console.log(res);
+         }).catch((err)=>{console.log(err)});
+        
+
+    } catch (error) {
+      console.log(error);
+    }
   }
   return (
     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
@@ -44,7 +53,7 @@ const login = () => {
             
           </div>
           <div className="card-actions justify-center ">
-            <button className="btn btn-primary px-5 text-[15px]">Login</button>
+            <button className="btn btn-primary px-5 text-[15px]" onClick={handleChanges}>Login</button>
           </div>
         </div>
       </div>
